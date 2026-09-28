@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+
+    inline-size: 100vw;
+    block-size: 100vh;
+
+    padding: 2rem;
+
+    background-color: var(--background-color);
+}
+
+.people-list {
+    
+}
