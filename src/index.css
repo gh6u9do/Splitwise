@@ -1,8 +1,21 @@
 :root {
-  --main-color: rgb(74, 74, 240);
-  --accent-color: rgb(129, 50, 202);
-  --text-color: rgb(16, 17, 13);
-  --background-color: white;
+  --color-primary: #0f766e;
+  --color-primary-hover: #115e59;
+  /* фон активных элементов */
+  --color-primary-light: #f0fdf4;
+
+
+  --color-bg: #f4f7f5;
+  /* фон для карточек и блоков */
+  --color-surface: #ffffff;
+  --color-border: #b0b9c9;
+
+
+  --color-text: #1f2937;
+  --color-text-muted: #6b7280;
+
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
 
   font-size: 20px;
 }
