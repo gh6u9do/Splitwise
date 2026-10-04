@@ -1,12 +1,25 @@
 import styles from './button.module.css';
 
-// в пропсы прокидываем все стандартные атрибуты кнопки
-type TButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+type TButtonVariant = 'primary' | 'danger' | 'success'; 
 
-export const Button = ({children, ...props}: TButtonProps) => {
+// в пропсы прокидываем все стандартные атрибуты кнопки
+type TButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    variant?: TButtonVariant
+};
+
+export const Button = ({children, className, variant = 'primary', ...props}: TButtonProps) => {
+
+    // динамически собираем массив классов
+    const buttonClasses = [
+        styles.button,
+        styles[variant],
+        className
+        // фильтруем от лишних значений типа undefined, null etc
+    ].filter(Boolean).join(' ');
+
 
     return (
-        <button className={styles.button} {...props}>
+        <button className={buttonClasses} {...props}>
             {children}
         </button>
     )

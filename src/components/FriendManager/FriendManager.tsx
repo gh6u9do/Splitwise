@@ -21,16 +21,22 @@ export const FriendManager = ({ friendsList, addFriendAtList, deleteFriendAtList
 
 
     // функция сабмита формы
-    function handeFormSubmit(e: React.SubmitEvent) {
+    function handeFormSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         // предотвращаем стандартное поведение формы
         e.preventDefault();
+
+        // если после очистки пробелов строка пустая - выходим
+        if (!nameInputValue.trim()) {
+            return;
+        }
+
+        // добавляем друга в список
+        addFriendAtList(nameInputValue.trim());
+
+        // очищаем инпут
+        setNameInputValue('');
     }
 
-    // функция удаления человека из списка
-    function deleteFriendFromList(id: string) {
-        // ищем в массиве юзера по id
-        friendsList.find((friend) => friend?.id === id)
-    }
 
     return (
         <section className={styles['wrapper']}>
@@ -40,7 +46,8 @@ export const FriendManager = ({ friendsList, addFriendAtList, deleteFriendAtList
                     className={styles['form__input']}
                     name='friendName'
                     placeholder='Имя'
-                    min={2}
+                    minLength={2}
+                    maxLength={20}
                     value={nameInputValue}
                     onChange={(e) => setNameInputValue(e.target.value)}
                 />
@@ -56,9 +63,15 @@ export const FriendManager = ({ friendsList, addFriendAtList, deleteFriendAtList
                     <p>Пока список пуст :(</p>
                 ) : (
                     friendsList.map((friend) => (
-                        <div key={crypto.randomUUID()} className={styles['friendList__friendItem']}>
-                            <span>{friend.name}</span>
-                            <Button type='button'>Удалить</Button>
+                        <div key={friend.id} className={styles['friendList__friendItem']}>
+                            <span className={styles['friendItem__name']}>{friend.name}</span>
+                            <Button 
+                                type='button' 
+                                variant='danger'
+                                onClick={(e) => deleteFriendAtList(friend.id)}
+                            >
+                                Удалить
+                            </Button>
                         </div>
                     ))
                 )}

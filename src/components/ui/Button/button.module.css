@@ -1,25 +1,36 @@
+/* Базовые стили для ВСЕХ кнопок без исключения */
 .button {
-    inline-size: 100%;
-
-    padding: 0.5rem 1rem;
-
-    background-color: transparent;
-    color: var(--color-text);
-
-    border: 2px solid var(--color-border);
-
-    cursor: pointer;
-
-    transition: all 0.2s;
+  inline-size: 100%;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.button:hover {
+/* стили для базовой кнопки */
+.primary {
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.primary:hover {
   background-color: var(--color-primary-hover);
   color: var(--color-primary-light);
 }
 
-.button:active {
-  transform: scale(98%);
+/* предупреждающие стили */
+.danger {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+.danger:hover {
+  background-color: var(--color-danger);
+  color: var(--color-bg); 
+}
+
+/* Общие состояния */
+.button:active { 
+  transform: scale(98%); 
 }
 
 .button:disabled {
