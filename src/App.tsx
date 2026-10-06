@@ -27,11 +27,13 @@ function App() {
   return (
     <>
      <section className={styles.wrapper}>
-       <FriendManager
-        addFriendAtList={addFriend}
-        deleteFriendAtList={deleteFriend}
-        friendsList={friendsList}
-       />
+        <div className={styles['wrapper__friendList']}>
+          <FriendManager
+            addFriendAtList={addFriend}
+            deleteFriendAtList={deleteFriend}
+            friendsList={friendsList}
+          />
+        </div>
      </section>
       
     </>

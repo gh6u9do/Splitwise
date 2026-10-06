@@ -8,6 +8,16 @@
   transition: all 0.2s;
 }
 
+/* стили для фокуса по табу */
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0px 0px 5px 2px var(--color-text-muted);
+}
+
+.button:focus {
+  outline: none;
+}
+
 /* стили для базовой кнопки */
 .primary {
   color: var(--color-text);

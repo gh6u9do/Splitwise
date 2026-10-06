@@ -43,6 +43,7 @@ export const FriendManager = ({ friendsList, addFriendAtList, deleteFriendAtList
             <form className={styles['wrapper__form']} onSubmit={handeFormSubmit}>
                 <Input
                     ref={refInputName}
+                    label='Введите имя'
                     className={styles['form__input']}
                     name='friendName'
                     placeholder='Имя'
@@ -60,7 +61,7 @@ export const FriendManager = ({ friendsList, addFriendAtList, deleteFriendAtList
 
             <div className={styles['wrapper__friendsList']}>
                 {friendsList.length === 0 ? (
-                    <p>Пока список пуст :(</p>
+                    <p className={styles['friendList__emptyMessage']}>Пока список пуст :(</p>
                 ) : (
                     friendsList.map((friend) => (
                         <div key={friend.id} className={styles['friendList__friendItem']}>
@@ -70,7 +71,7 @@ export const FriendManager = ({ friendsList, addFriendAtList, deleteFriendAtList
                                 variant='danger'
                                 onClick={(e) => deleteFriendAtList(friend.id)}
                             >
-                                Удалить
+                                Х
                             </Button>
                         </div>
                     ))

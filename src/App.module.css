@@ -5,6 +5,7 @@
     flex-direction: column;
     gap: 1rem;
 
+    /* border: 1px solid red; */
 
     inline-size: 100vw;
     block-size: 100vh;
@@ -14,6 +15,9 @@
     background-color: var(--background-color);
 }
 
-.people-list {
-    
+.wrapper__friendList {
+    /* border: 1px solid blue; */
+
+    max-inline-size: 30vw;
+    width: 100%;
 }

@@ -4,17 +4,18 @@
 }
 
 .wrapper__label {
-
+    color: var(--color-text);
 }
 
 .wrapper__input {
     padding: 0.2rem 0.5rem;
 
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);  
+
+    transition: all 0.2s;
 }
 
-.wrapper__input:focus {
+.wrapper__input:focus-visible {
     outline: none;
-
-    border-color: var(--color-primary-hover);
+    box-shadow: 0 0 5px 2px var(--color-text-muted);
 }
