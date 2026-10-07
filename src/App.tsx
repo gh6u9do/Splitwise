@@ -3,6 +3,7 @@ import styles from './App.module.css';
 import { Button } from './components/ui/Button/Button';
 import { Input } from './components/ui/Input/Input';
 import { FriendManager } from './components/FriendManager/FriendManager';
+import { ExpenseForm } from './components/ExpenseForm/ExpenseForm';
 
 // тип друга
 export type TFriend = {
@@ -34,6 +35,17 @@ function App() {
             friendsList={friendsList}
           />
         </div>
+        {/* если людей в списке нет - не показываем форму */}
+        {friendsList.length > 0 ? (
+          <div className={styles['wrapper__expenseForm']}>
+            <ExpenseForm
+              friendList={friendsList}
+            />
+          </div>
+
+        ): (
+          <div></div>
+        )}
      </section>
       
     </>

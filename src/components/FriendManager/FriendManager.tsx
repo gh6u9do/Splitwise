@@ -40,13 +40,15 @@ export const FriendManager = ({ friendsList, addFriendAtList, deleteFriendAtList
 
     return (
         <section className={styles['wrapper']}>
+            <h2 className={styles['wrapper__header']}>Люди в компании</h2>
             <form className={styles['wrapper__form']} onSubmit={handeFormSubmit}>
                 <Input
                     ref={refInputName}
                     label='Введите имя'
                     className={styles['form__input']}
                     name='friendName'
-                    placeholder='Имя'
+                    placeholder='Иван'
+                    required
                     minLength={2}
                     maxLength={20}
                     value={nameInputValue}

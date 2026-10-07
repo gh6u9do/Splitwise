@@ -6,6 +6,7 @@
   border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.2s;
+  color: var(--color-text);
 }
 
 /* стили для фокуса по табу */
