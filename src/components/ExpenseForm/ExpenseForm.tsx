@@ -6,7 +6,8 @@ import { useState } from 'react';
 
 
 type TExpenseFormProps = {
-    friendList: TFriend[]
+    friendList: TFriend[],
+    addExpense: (expese: TExpense) => void
 }
 
 export type TExpense = {
@@ -20,17 +21,39 @@ export type TExpense = {
     friendId: string;
 }
 
-function onSubmitExpenseForm(e: React.SubmitEvent) {
-    // 
-    e.preventDefault();
-}
 
-export const ExpenseForm = ({friendList}: TExpenseFormProps) => {
+
+export const ExpenseForm = ({friendList, addExpense}: TExpenseFormProps) => {
 
     // локальный стейт для названия траты
     const [expenseTitle, setExpenseTitle] = useState('');
     // локальный стейт для суммы траты
     const [expenseAmount, setExpenseAmount] = useState('');
+    // локальный стейт для id заплатившего
+    const [paidById, setPaidById] = useState(friendList[0].id || '');
+
+    function onSubmitExpenseForm(e: React.SubmitEvent<HTMLFormElement>) {
+        // отменяем дефолтное поведение
+        e.preventDefault();
+
+        // проверяем что нет пустых полей
+        if(!expenseTitle.trim() || !expenseAmount) {
+            return;
+        }
+
+        // добавляем трату в стейт
+        addExpense({
+            id: crypto.randomUUID(),
+            title: expenseTitle,
+            amount: Number(expenseAmount),
+            friendId: paidById
+        });
+
+        // очищаем поля формы
+        setExpenseTitle('');
+        setExpenseAmount('');
+
+    }
 
     return (
         <section className={styles.wrapper}>
@@ -54,7 +77,14 @@ export const ExpenseForm = ({friendList}: TExpenseFormProps) => {
                     <select className={styles['form__whoPayedSelect']}>
                         {friendList.map((friend) => {
                             return (
-                                <option className={styles['form__whoPaidOption']}>{friend.name}</option>
+                                <option 
+                                    key={friend.id} 
+                                    value={paidById} 
+                                    className={styles['form__whoPaidOption']}
+                                    onChange={(e) => setPaidById(e.target.value)}
+                                >
+                                    {friend.name}
+                                </option>
                             )
                         })}
                     </select>

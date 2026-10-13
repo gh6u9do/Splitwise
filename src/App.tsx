@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import styles from './App.module.css';
-import { Button } from './components/ui/Button/Button';
-import { Input } from './components/ui/Input/Input';
 import { FriendManager } from './components/FriendManager/FriendManager';
-import { ExpenseForm } from './components/ExpenseForm/ExpenseForm';
+import { ExpenseForm, type TExpense } from './components/ExpenseForm/ExpenseForm';
 
 // тип друга
 export type TFriend = {
@@ -12,17 +10,33 @@ export type TFriend = {
 }
 
 function App() {
-  // массив друзей
+  // стейт друзей
   const [friendsList, setFriendsList] = useState<TFriend[]>([]);
 
+  // стейт трат
+  const [expenseList, setExpenseList] = useState<TExpense[]>([]);
+
+  // функция добавления друга в стейт
   function addFriend(name: string) {
       // добавляем нового человека в стейт, расширяя предыдущее значение
       setFriendsList((prev) => [...prev, {id: crypto.randomUUID(), name}]);
   }
 
+  // функция удаления друга из стейта
   function deleteFriend(id: string) {
       // возвращаем в стейт массив без элемента с переданным id
       setFriendsList((prev) => prev.filter((friend) => friend.id !== id));
+  }
+
+
+  // функция добавления траты в стейт
+  function addExpense(expense: TExpense) {
+    setExpenseList((prev) => [...prev, expense]);
+  }
+
+  // функция убрает трату из стейта
+  function deleteExpense(id: string) {
+    setExpenseList((prev) => prev.filter((expense) => expense.id !== id));
   }
 
   return (
@@ -40,6 +54,7 @@ function App() {
           <div className={styles['wrapper__expenseForm']}>
             <ExpenseForm
               friendList={friendsList}
+              addExpense={addExpense}
             />
           </div>
 
