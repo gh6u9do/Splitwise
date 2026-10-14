@@ -2,9 +2,6 @@
     display: flex;
     align-items: start;
     justify-content: center;
-    /* gap: 1rem; */
-
-    /* border: 1px solid red; */
 
     inline-size: 100vw;
     block-size: 100vh;
@@ -14,17 +11,9 @@
     background-color: var(--background-color);
 }
 
-.wrapper__friendList {
+.wrapper__section {
     padding: 0.5rem 1rem;
+    max-block-size: 50vh;
     block-size: 100%;
-    /* border-right: 1px solid var(--color-border); */
-
 }
 
-.wrapper__expenseForm {
-    padding: 0.5rem 1rem;
-
-    block-size: 100%;
-
-    /* border-left: 1px solid var(--color-border); */
-}

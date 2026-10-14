@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './App.module.css';
 import { FriendManager } from './components/FriendManager/FriendManager';
 import { ExpenseForm, type TExpense } from './components/ExpenseForm/ExpenseForm';
+import { ExpenseList } from './components/ExpenseList/ExpenseList';
 
 // тип друга
 export type TFriend = {
@@ -42,7 +43,7 @@ function App() {
   return (
     <>
      <section className={styles.wrapper}>
-        <div className={styles['wrapper__friendList']}>
+        <div className={styles['wrapper__section']}>
           <FriendManager
             addFriendAtList={addFriend}
             deleteFriendAtList={deleteFriend}
@@ -51,7 +52,7 @@ function App() {
         </div>
         {/* если людей в списке нет - не показываем форму */}
         {friendsList.length > 0 ? (
-          <div className={styles['wrapper__expenseForm']}>
+          <div className={styles['wrapper__section']}>
             <ExpenseForm
               friendList={friendsList}
               addExpense={addExpense}
@@ -59,6 +60,18 @@ function App() {
           </div>
 
         ): (
+          <div></div>
+        )}
+        {/* если трат в стейте нет - не показываем список */}
+        {expenseList.length > 0 && friendsList.length > 0  ?  (
+          <div className={styles['wrapper__section']}>
+            <ExpenseList
+              expenses={expenseList}
+              friends={friendsList}
+              deleteExpense={deleteExpense}
+            />
+          </div>
+        ) : (
           <div></div>
         )}
      </section>

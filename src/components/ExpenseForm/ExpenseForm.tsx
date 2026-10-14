@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 type TExpenseFormProps = {
     friendList: TFriend[],
-    addExpense: (expese: TExpense) => void
+    addExpense: (expense: TExpense) => void
 }
 
 export type TExpense = {
@@ -32,6 +32,7 @@ export const ExpenseForm = ({friendList, addExpense}: TExpenseFormProps) => {
     // локальный стейт для id заплатившего
     const [paidById, setPaidById] = useState(friendList[0].id || '');
 
+    // функция сабмита ExpenseForm
     function onSubmitExpenseForm(e: React.SubmitEvent<HTMLFormElement>) {
         // отменяем дефолтное поведение
         e.preventDefault();
@@ -62,26 +63,30 @@ export const ExpenseForm = ({friendList, addExpense}: TExpenseFormProps) => {
                 <Input
                     label='На что потратили?'
                     type='text'
+                    placeholder='Пицца'
                     value={expenseTitle}
                     onChange={(e) => setExpenseTitle(e.target.value)}
                 />
                 <Input
                     label='Сколько потратили?'
                     type='number'
+                    placeholder='1499'
                     min={1}
                     value={expenseAmount}
                     onChange={(e) => setExpenseAmount(e.target.value)}
                 />
                 <label className={styles['form__whoPayedLabel']}>
                     Кто платил?
-                    <select className={styles['form__whoPayedSelect']}>
+                    <select 
+                        className={styles['form__whoPayedSelect']}
+                        onChange={(e) => setPaidById(e.target.value)}
+                    >
                         {friendList.map((friend) => {
                             return (
                                 <option 
                                     key={friend.id} 
-                                    value={paidById} 
+                                    value={friend.id} 
                                     className={styles['form__whoPaidOption']}
-                                    onChange={(e) => setPaidById(e.target.value)}
                                 >
                                     {friend.name}
                                 </option>
