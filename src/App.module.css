@@ -1,7 +1,7 @@
 .wrapper {
-    display: flex;
-    align-items: start;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
 
     inline-size: 100vw;
     block-size: 100vh;

@@ -42,12 +42,18 @@ export const ExpenseForm = ({friendList, addExpense}: TExpenseFormProps) => {
             return;
         }
 
+        // проверяем существует ли друг в актуальном списке
+        const isFriendExists = friendList.some((friend) => friend.id === paidById);
+
+        // Если существует — берем paidById, если нет — берем ID первого друга из списка
+        const actualPaidById = isFriendExists ? paidById : friendList[0].id;
+
         // добавляем трату в стейт
         addExpense({
             id: crypto.randomUUID(),
             title: expenseTitle,
             amount: Number(expenseAmount),
-            friendId: paidById
+            friendId: actualPaidById
         });
 
         // очищаем поля формы
