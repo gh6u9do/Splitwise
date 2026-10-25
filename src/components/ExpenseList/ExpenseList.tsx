@@ -26,7 +26,7 @@ export const ExpenseList = ({expenses, friends, deleteExpense}: TExpenseListProp
                         </p>
                         <Button
                             variant='danger'
-                            onClick={(e) => deleteExpense(expense.id)}
+                            onClick={() => deleteExpense(expense.id)}
                         >X</Button>
                     </div>
                 ))}

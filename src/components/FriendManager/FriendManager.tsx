@@ -71,7 +71,7 @@ export const FriendManager = ({ friendsList, addFriendAtList, deleteFriendAtList
                             <Button 
                                 type='button' 
                                 variant='danger'
-                                onClick={(e) => deleteFriendAtList(friend.id)}
+                                onClick={() => deleteFriendAtList(friend.id)}
                             >
                                 Х
                             </Button>
