@@ -1,0 +1,42 @@
+name: Deploy to GitHub Pages
+
+# 1. Говорим гитхабу запускать этот скрипт ТОЛЬКО при пуше в ветку main (или master)
+on:
+  push:
+    branches:
+      - main 
+
+# 2. Даем гитхабу права на запись данных, чтобы он мог создать ветку gh-pages и залить туда билд
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # запускаем чистую виртуальную машину на Ubuntu
+
+    steps:
+      # Шаг 1: Скачиваем твой код из репозитория на виртуалку
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Шаг 2: Устанавливаем Node.js на виртуалку
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-size: 20 # берем актуальную версию Node
+          cache: 'npm'  # кэшируем зависимости, чтобы сборка в следующий раз шла быстрее
+
+      # Шаг 3: Устанавливаем твои npm-пакеты
+      - name: Install dependencies
+        run: npm ci # команда npm ci — это быстрый аналог npm install для CI-систем
+
+      # Шаг 4: Компилируем TypeScript и собираем Vite-проект в папку /dist
+      - name: Build project
+        run: npm run build
+
+      # Шаг 5: Магия деплоя. Специальный экшен берет папку /dist и пушит её в ветку gh-pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist # какую папку деплоим
+          branch: gh-pages # в какую ветку заливаем (гитхаб сам сделает из неё сайт)
