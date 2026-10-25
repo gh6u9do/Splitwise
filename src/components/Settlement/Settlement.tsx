@@ -28,7 +28,7 @@ export const Settlement = ({ transactions, friendList }: TSettlementProps) => {
                             <span className={styles['settlement__sender']}>{senderName}</span>
                             <span className={styles['settlement__arrow']}>➡️</span>
                             <span className={styles['settlement__receiver']}>{receiverName}</span>
-                            <span className={styles['settlement__amount']}>{transaction.amount}</span>
+                            <span className={styles['settlement__amount']}>{Math.ceil(transaction.amount)}</span>
                         </div>
                     );
                 }

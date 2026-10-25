@@ -76,7 +76,7 @@ export const ExpenseForm = ({friendList, addExpense}: TExpenseFormProps) => {
                 <Input
                     label='Сколько потратили?'
                     type='number'
-                    placeholder='1499'
+                    placeholder='500'
                     min={1}
                     value={expenseAmount}
                     onChange={(e) => setExpenseAmount(e.target.value)}

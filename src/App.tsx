@@ -58,18 +58,18 @@ function App() {
     // считаем должников
     const debtors = balances
       // сначала находим только тех кто у кого баланс отрицательный
-      .filter((balance) => balance.balance < -0.01 )
+      .filter((balance) => balance.balance < -0.01)
       // переводим отрицательный баланс в положительное значение для удобства
-      .map((balance) => ({...balance, balance: Math.abs(balance.balance)})
-    );
+      .map((balance) => ({ ...balance, balance: Math.abs(balance.balance) })
+      );
 
 
     // считаем кредиторов
     const creditors = balances.filter((balances) => balances.balance > 0.01);
 
-     
+
     // массив для транзакций
-    const transactions:TTransaction[] = [];
+    const transactions: TTransaction[] = [];
 
     // индекс должников
     let debtorsIndex = 0;
@@ -77,7 +77,7 @@ function App() {
     let creditorsIndex = 0;
 
     // сводим должников и кредиторов
-    while(debtorsIndex < debtors.length && creditorsIndex < creditors.length) {
+    while (debtorsIndex < debtors.length && creditorsIndex < creditors.length) {
       // берем конкретного должника
       const debtor = debtors[debtorsIndex];
       // берем конкретного кредитора
@@ -95,17 +95,17 @@ function App() {
       });
 
       // вычитаем со счета должника сумму перевода кредитору
-      debtor.balance -= transactionValue; 
+      debtor.balance -= transactionValue;
       // вычитаем со счета кредитора сумму перевода должника
       creditor.balance -= transactionValue;
 
       // если чей-то баланс закрылся - двигаем индекс дальше
-      if(debtor.balance < 0.01) {
+      if (debtor.balance < 0.01) {
         debtorsIndex++;
-      } 
-      if(creditor.balance < 0.01) {
+      }
+      if (creditor.balance < 0.01) {
         creditorsIndex++;
-      } 
+      }
     }
 
     // возвращаем объект с транзакциями
@@ -143,52 +143,54 @@ function App() {
   return (
     <>
       <section className={styles.wrapper}>
-        <div className={styles['wrapper__section']}>
-          <FriendManager
-            addFriendAtList={addFriend}
-            deleteFriendAtList={deleteFriend}
-            friendsList={friendsList}
-          />
+        <div className={styles['wrapper__formsContainer']}>
+
+          <div className={styles['container__section']}>
+            <FriendManager
+              addFriendAtList={addFriend}
+              deleteFriendAtList={deleteFriend}
+              friendsList={friendsList}
+            />
+          </div>
+
+
+            {/* если людей в списке нет - не показываем форму */}
+            {friendsList.length > 0 && (
+              <div className={styles['container__section']}>
+                <ExpenseForm
+                  friendList={friendsList}
+                  addExpense={addExpense}
+                />
+              </div>
+            )}
+
+
+            {/* если трат в стейте нет - не показываем список */}
+            {expenseList.length > 0 && friendsList.length > 0 && (
+              <div className={styles['container__section']}>
+                <ExpenseList
+                  expenses={expenseList}
+                  friends={friendsList}
+                  deleteExpense={deleteExpense}
+                />
+              </div>
+            )}
+            
+          </div>
+        
+
+        <div className={styles['wrapper__debtsContainer']}>
+          {/* если в debts нет транзакций ниче не показываем */}
+          {debts.length > 0 ? (
+              <Settlement
+                friendList={friendsList}
+                transactions={debts}
+              />
+          ) : (
+            <div></div>
+          )}
         </div>
-        {/* если людей в списке нет - не показываем форму */}
-        {friendsList.length > 0 ? (
-          <div className={styles['wrapper__section']}>
-            <ExpenseForm
-              friendList={friendsList}
-              addExpense={addExpense}
-            />
-          </div>
-
-        ) : (
-          <div></div>
-        )}
-        {/* если трат в стейте нет - не показываем список */}
-        {expenseList.length > 0 && friendsList.length > 0 ? (
-          <div className={styles['wrapper__section']}>
-            <ExpenseList
-              expenses={expenseList}
-              friends={friendsList}
-              deleteExpense={deleteExpense}
-            />
-          </div>
-        ) : (
-          <div></div>
-        )}
-
-        {/* если в debts нет транзакций ниче не показываем */}
-        {debts.length > 0 ? (
-          <section>
-            <Settlement
-              friendList={friendsList}
-              transactions={debts}
-            />
-          </section>
-        ): (
-          <div></div>
-        )}
-
       </section>
-
     </>
   )
 }

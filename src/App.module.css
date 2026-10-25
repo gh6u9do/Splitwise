@@ -1,19 +1,93 @@
 .wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 2fr 1fr;
+    display: flex;
+    flex-direction: column;
 
-    inline-size: 100vw;
-    block-size: 100vh;
+    min-block-size: 100vh;
 
-    padding: 2rem;
+    padding: var(--spacing-md);
 
     background-color: var(--background-color);
+
+    gap: var(--spacing-md);
 }
 
-.wrapper__section {
-    padding: 0.5rem 1rem;
-    max-block-size: 50vh;
-    block-size: 100%;
+/* контейнер для верхних блоков */
+.wrapper__formsContainer {
+    inline-size: 100%;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
 }
 
+/* контейнер для нижних блоков */
+.wrapper__debtsContainer {
+    inline-size: 100%;
+}
+
+/* отдельные карточки (формы) */
+.container__section {
+    inline-size: 100%;
+
+    padding: var(--spacing-sm) var(--spacing-md);
+
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* десктопный адаптив */
+@media (min-width: 768px) {
+    .wrapper {
+        padding: var(--spacing-xl);
+        gap: var(--spacing-xl);
+
+        max-inline-size: none;
+    }
+
+    /* секция с формами */
+    .wrapper__formsContainer {
+        /* Жестко фиксируем высоту этой секции на десктопе */
+        block-size: calc(100vh - var(--spacing-xl) * 2);
+        inline-size: 100%;
+
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: start;
+        justify-content: center;
+        /* растягиваем карточки одинаково по высоте */
+        align-items: stretch;
+        gap: var(--spacing-xl);
+    }
+
+    /* cекция кто кому переводит */
+    .wrapper__debtsContainer {
+        /* Тоже фиксируем высоту следующего экрана */
+        min-block-size: calc(100vh - var(--spacing-xl) * 2);
+        inline-size: 100%;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    .container__section {
+        /* секции должны делить ширину попровну*/
+        flex: 1;
+        /* На десктопе карточки должны занять 100% высоты своего контейнера */
+        block-size: 100%;
+        max-block-size: none;
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

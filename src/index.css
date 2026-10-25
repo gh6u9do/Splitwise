@@ -17,9 +17,20 @@
   --color-danger: #ef4444;
   --color-success: #22c55e;
 
-  --font-family-header:  Verdana, Geneva, Tahoma, sans-serif
+  --font-family-header:  Verdana, Geneva, Tahoma, sans-serif;
 
-  font-size: 15px;
+  /* дизайн система размеров текста */
+  --font-size-base: 16px;
+  --font-size-header: 2rem;
+  --font-size-input: 1rem;
+  --font-size-muted: 0.85rem;
+
+  /* дизайн система отступов */
+  --spacing-sm: 0.5rem;   
+  --spacing-md: 1rem;     
+  --spacing-lg: 1.5rem;   
+  --spacing-xl: 2rem;     
+
 }
 
 /* Указываем box sizing */

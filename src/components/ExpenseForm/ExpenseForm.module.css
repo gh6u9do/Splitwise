@@ -1,16 +1,16 @@
 .wrapper {
     background-color: var(--color-surface);
     border-radius: 8px;
-    padding: 1.5rem;
+    padding: var(--spacing-sm);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     
     border: 1px solid transparent;
 
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--spacing-sm);
     inline-size: 100%;
-    max-block-size: 50vh;
+    max-block-size: 100%;
 
     transition: all 0.4s;
 }
@@ -29,15 +29,16 @@
 .wrapper__form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem; /* немного просторнее */
+    gap: 1.25rem; 
 }
 
 .form__whoPayedLabel {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem; /* отступ между текстом лейбла и селектом */
+    /* отступ между текстом лейбла и селектом */
+    gap: 0.4rem; 
+
     color: var(--color-text);
-    font-size: 1rem;
 }
 
 .form__whoPayedSelect {
@@ -60,4 +61,12 @@
 .form__whoPaidOption {
     background-color: var(--color-surface);
     color: var(--color-text);
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    block-size: 100%;
+    max-block-size: 100%;
+    padding: var(--spacing-lg);
+  }
 }
